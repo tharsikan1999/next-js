@@ -29,7 +29,7 @@ const Home: React.FC = () => {
 
     const fetchNotes = async () => {
         try {
-            const res = await fetch('http://localhost:3000/api/get');
+            const res = await fetch('/api/get');
             const data = await res.json();
             setNotes(data.data);
         } catch (error) {
@@ -59,7 +59,7 @@ const Home: React.FC = () => {
                 });
                 return;
             }
-            await axios.post('http://localhost:3000/api/add', {
+            await axios.post('/api/add', {
                 title: formData.title,
                 note: formData.content
             });
@@ -76,7 +76,7 @@ const Home: React.FC = () => {
         const shouldDelete = window.confirm("Are you sure you want to delete this note?");
         if (shouldDelete) {
             try {
-                await axios.delete(`http://localhost:3000/api/delete/${notes[index]._id}`);
+                await axios.delete(`/api/delete/${notes[index]._id}`);
                 fetchNotes();
             } catch (error) {
                 console.error('Error deleting note:', error);
@@ -96,7 +96,7 @@ const Home: React.FC = () => {
     const handleUpdate = async () => {
         try {
             if (selectedRowIndex !== null) {
-                await axios.put(`http://localhost:3000/api/update/${notes[selectedRowIndex]._id}`, {
+                await axios.put(`/api/update/${notes[selectedRowIndex]._id}`, {
                     title: formData.title,
                     note: formData.content
                 });
